@@ -44,10 +44,11 @@ interface EventDispatcherInterface
      * @param callable $listener  The listener
      * @param int      $priority  The higher this value, the earlier an event
      *                            listener will be triggered in the chain (defaults to 0)
+     * @param int      $max       Number of executions possible (0 for unlimited)
      *
      * @api
      */
-    public function addListener($eventName, $listener, $priority = 0);
+    public function addListener($eventName, $listener, $priority = 0, $max = 0);
 
     /**
      * Adds an event subscriber.

@@ -31,6 +31,7 @@ class EventDispatcher implements EventDispatcherInterface
 {
     private $listeners = array();
     private $sorted = array();
+    private $maximums = array();
 
     /**
      * @see EventDispatcherInterface::dispatch()
@@ -91,9 +92,14 @@ class EventDispatcher implements EventDispatcherInterface
      *
      * @api
      */
-    public function addListener($eventName, $listener, $priority = 0)
+    public function addListener($eventName, $listener, $priority = 0, $max = 0)
     {
         $this->listeners[$eventName][$priority][] = $listener;
+
+        if (0 !== $max) {
+            $this->maximums[$eventName][$listener] = $max;
+        }
+
         unset($this->sorted[$eventName]);
     }
 
